@@ -2,10 +2,10 @@ Vagrant.configure('2') do |config|
   config.vm.box = "azure"
 
     config.vm.provider :azure do |azure, override|
-	azure.tenant_id = 'e1b7b957-9112-458f-b2b7-fa79c46acc4f'
-    azure.client_id = '4683f375-c694-4d77-a5f0-c20fef6c1fe7'
-    azure.client_secret = '5dae1858-876a-4306-bea2-2f0be5bc0bba'
-    azure.subscription_id = 'b0b8c679-64ca-4be5-9194-32a4f5cc468a'
+	azure.tenant_id = '******************************'
+    azure.client_id = '**********************************'
+    azure.client_secret = '******************************'
+    azure.subscription_id = '***************************'
 	
 	azure.vm_image_urn = "MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest"
 	azure.instance_ready_timeout = 800
