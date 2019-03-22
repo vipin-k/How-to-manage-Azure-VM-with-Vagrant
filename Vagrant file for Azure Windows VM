@@ -1,0 +1,28 @@
+Vagrant.configure('2') do |config|
+  config.vm.box = "azure"
+
+    config.vm.provider :azure do |azure, override|
+	azure.tenant_id = 'e1b7b957-9112-458f-b2b7-fa79c46acc4f'
+    azure.client_id = '4683f375-c694-4d77-a5f0-c20fef6c1fe7'
+    azure.client_secret = '5dae1858-876a-4306-bea2-2f0be5bc0bba'
+    azure.subscription_id = 'b0b8c679-64ca-4be5-9194-32a4f5cc468a'
+	
+	azure.vm_image_urn = "MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest"
+	azure.instance_ready_timeout = 800
+	azure.vm_name='devmachine101'
+	azure.admin_username = 'vagrant'
+	azure.admin_password = 'Vagrant@007'
+	azure.resource_group_name='youtubedemo9'
+	azure.location = "EastUS"
+	azure.wait_for_destroy = true
+ end
+  config.vm.guest = :windows
+  config.vm.communicator = "winrm"
+  config.winrm.transport = :ssl
+  config.winrm.ssl_peer_verification = false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  # Vagrant 1.9.3 - if you run into Errno::EADDRNOTAVAIL, add host_ip: "127.0.0.1" for it to work
+  config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true #, host_ip: "127.0.0.1"
+  config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true #, host_ip: "127.0.0.1"
+end
